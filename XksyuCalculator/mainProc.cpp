@@ -5,7 +5,7 @@ VOID update(LPCWSTR x);
 VOID update_equal();
 VOID del();
 
-HWND hPutMain, hPutLite, hNumberButton[9], hSymbolButton[9], hEqualButton;
+HWND hPutMain, hPutLite, hNumberButton[10], hSymbolButton[10], hEqualButton;
 
 const INT posi_y[5] = {190,275,360,445,530}, posi_x[4] = {15,130,245,360};
 
@@ -195,6 +195,44 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             break;
         default:
             break;
+        }
+        SetFocus(hWndMain);
+        break;
+    }
+
+    case WM_KEYDOWN:
+    {
+        if (wParam >= '0' && wParam <= '9')
+            SendMessage(hNumberButton[wParam-'0'], BM_CLICK, 0, 0);
+        else if(wParam >=VK_NUMPAD0 && wParam <=VK_NUMPAD9)
+            SendMessage(hNumberButton[wParam-VK_NUMPAD0], BM_CLICK, 0, 0);
+        else
+        {
+            switch (wParam)
+            {
+            case VK_BACK:
+            case VK_DELETE:
+                SendMessage(hSymbolButton[2], BM_CLICK, 0, 0);
+                break;
+            case VK_ESCAPE:
+                SendMessage(hSymbolButton[1], BM_CLICK, 0, 0);
+                break;
+            case VK_ADD:
+                SendMessage(hSymbolButton[6], BM_CLICK, 0, 0);
+                break;
+            case VK_MULTIPLY:
+                SendMessage(hSymbolButton[4], BM_CLICK, 0, 0);
+                break;
+            case VK_SUBTRACT:
+                SendMessage(hSymbolButton[5], BM_CLICK, 0, 0);
+                break;
+            case VK_DIVIDE:
+                SendMessage(hSymbolButton[3], BM_CLICK, 0, 0);
+                break;
+            case VK_RETURN:
+                SendMessage(hEqualButton, BM_CLICK, 0, 0);
+                break;
+            }
         }
         break;
     }

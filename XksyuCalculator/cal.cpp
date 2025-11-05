@@ -139,14 +139,6 @@ VOID update(LPCWSTR x)
 	divZero = FALSE;
 	if(update_input(x))
 		update_cal();
-	if (read >= INT_MAX || read <= INT_MIN || store >= INT_MAX || store <= INT_MIN)
-	{
-		MessageBox(
-			hWndMain, L"overflow!",
-			MB_OK, NULL
-		);
-		clear();
-	}
 }
 
 
